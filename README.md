@@ -1,5 +1,5 @@
-# CE{Code of Course}-{Short Name of Course}
-Solutions to Prof. {Name of Prof}'s CE{Code of Course}: {Full Name of Course} (Sharif University of Technology - {Semester} {Year}) Assignments
+# CE103-CAL
+Solutions to Prof. Sarbazi's CE103: Computer Architecture Lab (Sharif University of Technology - Summer 2026) Assignments
 
 ## Table of Contents
 
