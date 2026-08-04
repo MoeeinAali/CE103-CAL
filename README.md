@@ -16,6 +16,7 @@ Solutions to Prof. Sarbazi's CE103: Computer Architecture Lab (Sharif University
 In the "Assignments" folder, you will find the solutions to assignments given during the course.
 
 - [Lab 01 — BCD (Decimal) Adder](Assignments/Lab01-BCD-Adder/) — سه جمع‌کننده دهدهی یک‌رقمی زنجیره‌شده در Logisim
+- [Lab 02 — Carry Select Adder](Assignments/Lab02-Carry-Select-Adder/) — جمع‌کننده ۶ بیتی با انتخاب رقم نقلی برای افزایش سرعت
 
 ## Exams
 
