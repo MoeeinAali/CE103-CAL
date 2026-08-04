@@ -15,6 +15,8 @@ Solutions to Prof. Sarbazi's CE103: Computer Architecture Lab (Sharif University
 
 In the "Assignments" folder, you will find the solutions to assignments given during the course.
 
+- [Lab 01 — BCD (Decimal) Adder](Assignments/Lab01-BCD-Adder/) — سه جمع‌کننده دهدهی یک‌رقمی زنجیره‌شده در Logisim
+
 ## Exams
 
 In the "Exams" folder, you will find the solutions to the midterm and final of the course.
@@ -30,6 +32,10 @@ In the "Notes" folder, you will find the course notes.
 ## Source
 
 In the "Source" folder, you will find the source of the course.
+
+## Tooling
+
+- [MCP.md](MCP.md) — setup for Logisim MCP (Cursor / future agent sessions)
 
 ## Maintainer
 

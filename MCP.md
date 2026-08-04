@@ -1,0 +1,144 @@
+# Logisim MCP Setup (CE103-CAL)
+
+این فایل برای **سشن‌های بعدی Cursor** است تا بدون حدس زدن، MCP لاجسییم را راه بیندازند و مدارهای آزمایشگاه را بسازند/تست کنند.
+
+## پیش‌نیازها (همین ماشین)
+
+| ابزار | مسیر / نسخه |
+|--------|-------------|
+| logisim-mcp | `/Users/moeein/Desktop/logisim-mcp` |
+| venv Python | `/Users/moeein/Desktop/logisim-mcp/.venv` |
+| Logisim Evolution | `/Applications/Logisim-evolution.app` |
+| JAR | `/Applications/Logisim-evolution.app/Contents/app/logisim-evolution-4.1.0-all.jar` |
+| Java | **۲۱ یا بالاتر** — `/opt/homebrew/opt/openjdk@21/bin/java` |
+
+> Logisim Evolution 4.1 به **Java 21** نیاز دارد (class file 65). Java 17 باعث `UnsupportedClassVersionError` می‌شود.
+
+بررسی سریع:
+
+```bash
+/opt/homebrew/opt/openjdk@21/bin/java -version
+ls "/Applications/Logisim-evolution.app/Contents/app/"*.jar
+test -x /Users/moeein/Desktop/logisim-mcp/.venv/bin/python && echo ok
+```
+
+## نصب اولیه (اگر از صفر)
+
+```bash
+# 1) Logisim Evolution از سایت / Homebrew cask
+# 2) Java 21
+brew install openjdk@21
+
+# 3) MCP server
+git clone https://github.com/virsi/logisim-mcp.git ~/Desktop/logisim-mcp
+cd ~/Desktop/logisim-mcp
+python3 -m venv .venv
+.venv/bin/pip install -e .
+```
+
+## کانفیگ Cursor
+
+فایل: `~/.cursor/mcp.json`
+
+```json
+{
+  "mcpServers": {
+    "logisim": {
+      "command": "/Users/moeein/Desktop/logisim-mcp/.venv/bin/python",
+      "args": ["-m", "logisim_mcp"],
+      "env": {
+        "LOGISIM_JAR": "/Applications/Logisim-evolution.app/Contents/app/logisim-evolution-4.1.0-all.jar",
+        "JAVA": "/opt/homebrew/opt/openjdk@21/bin/java",
+        "LOGISIM_LOCALE": "en"
+      }
+    }
+  }
+}
+```
+
+بعد از تغییر: Cursor را ری‌استارت کنید (یا MCP server را Reload کنید) تا `JAVA` اعمال شود.
+
+در چت، سرور معمولاً با نام `user-logisim` دیده می‌شود.
+
+## ابزارهای مهم برای آزمایشگاه
+
+| کار | ابزار |
+|-----|--------|
+| فایل جدید `.circ` | `create_circuit_file` |
+| ساب‌مدار خالی | `add_subcircuit` |
+| تمام‌جمع‌کننده ۱ بیت | `build_full_adder` |
+| پین / گیت / قطعه | `add_pin`, `add_gate`, `add_component` |
+| سیم | `connect`, `add_wire`, `add_tunnel` |
+| توصیف نت‌لیست | `describe_circuit`, `describe_project` |
+| تست جدول درستی | `verify_truth_table` |
+| تست بردار `.vec` | `run_test_vector` |
+
+`type_key`های رایج `add_component`: `Adder`, `Comparator`, `Multiplexer`, `Constant`, `Clock`, `Register`, `Counter`.
+
+## تست بدون MCP (CLI مستقیم)
+
+اگر `verify_truth_table` داخل MCP به خاطر Java قدیمی fail شد، همین را در ترمینال بزنید (**بدون** `_JAVA_OPTIONS=-Djava.awt.headless=true` — Logisim headless را دوست ندارد):
+
+```bash
+export JAVA=/opt/homebrew/opt/openjdk@21/bin/java
+JAR="/Applications/Logisim-evolution.app/Contents/app/logisim-evolution-4.1.0-all.jar"
+CIRC="Assignments/Lab01-BCD-Adder/bcd_adder.circ"
+
+"$JAVA" -jar "$JAR" --no-splash --locale en \
+  --test-vector main Assignments/Lab01-BCD-Adder/tests_main_smoke.vec "$CIRC"
+```
+
+همچنین می‌توان از venv خود MCP با env درست import کرد:
+
+```bash
+export JAVA=/opt/homebrew/opt/openjdk@21/bin/java
+export LOGISIM_JAR="/Applications/Logisim-evolution.app/Contents/app/logisim-evolution-4.1.0-all.jar"
+/Users/moeein/Desktop/logisim-mcp/.venv/bin/python -c "
+from logisim_mcp.tools.sim_tools import verify_truth_table
+print(verify_truth_table(
+  'Assignments/Lab01-BCD-Adder/bcd_adder.circ',
+  'full_adder',
+  ['A','B','Cin'], ['Sum','Cout'],
+  [[str(a),str(b),str(c), str((a+b+c)&1), str((a+b+c)>>1)]
+   for a in (0,1) for b in (0,1) for c in (0,1)],
+))
+"
+```
+
+## الگوی کار برای هر Lab
+
+1. پوشه: `Assignments/LabNN-Name/`
+2. `create_circuit_file(.../lab.circ)`
+3. ساخت سلسله‌مراتبی (مثلاً `full_adder` → بلوک میانی → `main`)
+4. `describe_circuit` برای چک اتصال کوتاه / نت شناور
+5. `verify_truth_table` یا فایل `.vec` + CLI با Java 21
+6. README کوتاه داخل همان پوشه
+
+### تله‌های رایج (از Lab01)
+
+- **Comparator** پیش‌فرض `twosComplement` است؛ برای BCD حتماً `mode=unsigned`.
+- سیم‌کشی Lشکل می‌تواند ورودی‌ها را short کند؛ مسیر Cin را جدا از باس A/B بکشید.
+- هندسه پورت `Multiplexer` در MCP تقریبی است؛ برای انتخاب ۰/۶ گاهی `Bit Extender` (sign) + `AND` مطمئن‌تر است.
+- قرار دادن ساب‌مدار سفارشی با ظاهر پیش‌فرض سخت است؛ تونل‌های هم‌نام یا کپی منطق طبقه جایگزین خوبی است.
+- تست CLI را با مجوز کامل / نمایشگر بزنید؛ sandbox یا headless اغلب abort می‌شود.
+
+## فرمت بردار تست (`.vec`)
+
+```text
+A[4] B[4] Cin S[4] Cout
+0x5 0x3 0 0x8 0
+0x9 0x9 1 0x9 1
+```
+
+برای باس‌ها از `0xN` استفاده کنید؛ رقم هگز خام گاهی parse error می‌دهد.
+
+## مدار آماده Lab01
+
+- فایل: [`Assignments/Lab01-BCD-Adder/bcd_adder.circ`](Assignments/Lab01-BCD-Adder/bcd_adder.circ)
+- مدارها: `full_adder`, `bcd_digit`, `main`
+- جزئیات: [`Assignments/Lab01-BCD-Adder/README.md`](Assignments/Lab01-BCD-Adder/README.md)
+
+## لینک‌ها
+
+- [logisim-mcp](https://github.com/virsi/logisim-mcp)
+- [Logisim Evolution releases](https://github.com/logisim-evolution/logisim-evolution/releases)
