@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1785861791.08025 "/Users/moeein/Desktop/CE103-CAL/Assignments/Lab02-Carry-Select-Adder/LaTeX-Template/HW.tex" "HW.pdf" "HW" 1785861791.39206 2
-  "/Users/moeein/Desktop/CE103-CAL/Assignments/Lab02-Carry-Select-Adder/LaTeX-Template/HW.tex" 1785861790.81654 1548 75bdb856ae3c75cce406c68edd545aac ""
+["pdflatex"] 1785863394.70288 "/Users/moeein/Desktop/CE103-CAL/Assignments/Lab02-Carry-Select-Adder/LaTeX-Template/HW.tex" "HW.pdf" "HW" 1785863395.02608 2
+  "/Users/moeein/Desktop/CE103-CAL/Assignments/Lab02-Carry-Select-Adder/LaTeX-Template/HW.tex" 1785863394.09782 15293 a555550408a0b10032b817a55afe0d0f ""
   "/usr/local/texlive/2025/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1575674566 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
   "/usr/local/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty" 1576625341 40635 c40361e206be584d448876bba8a64a3b ""
   "/usr/local/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty" 1576016050 33961 6b5c75130e435b2bfdb9f480a09a39f9 ""
@@ -111,7 +111,7 @@
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "HW.aux" 0 -1 0 "pdflatex"
-  "HW.tex" 1785861790.81654 1548 75bdb856ae3c75cce406c68edd545aac ""
+  "HW.tex" 1785863394.09782 15293 a555550408a0b10032b817a55afe0d0f ""
   "commons/course.sty" 1785861696.11487 7703 9f369c347fe0cf95632b251eafe9a5d6 ""
   (generated)
   "HW.aux"
