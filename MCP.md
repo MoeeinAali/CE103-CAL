@@ -139,6 +139,21 @@ print(verify_truth_table(
   ```
   همچنین بهتر است `source="4.0.0"` در خط اول به نسخه‌ی نصب‌شده (اینجا `4.1.0`) تغییر کند تا با فایل‌های واقعاً ذخیره‌شده توسط برنامه هم‌خوان باشد.
 
+### تله‌ها و یافته‌ها (از Lab03)
+
+- **MCP کتابخانه‌ی TTL را پشتیبانی نمی‌کند** (`SPEC_FACTORIES` فقط گیت/مالتی‌پلکسر/رجیستر/شمارنده‌ی جنریک دارد). تراشه‌های ۷۴ را باید مستقیم در XML نوشت: `<lib desc="#TTL" name="7"/>` و `<comp lib="7" loc="(x,y)" name="74283"><a name="label" val="U2"/></comp>`.
+- **مختصات پین DIP** از `AbstractTtlGate.getOffsetBounds`/`updatePorts`. با `facing="south"` (تراشه‌ی عمودی) تراشه فضای `x−30 … x+30` و `y … y+10·pinCount` را می‌گیرد و:
+  - `p ≤ pinCount/2` → `(x−30, y + 20·(p−1) + 10)`
+  - `p > pinCount/2` → `(x+30, y + 10·pinCount − 20·(p − pinCount/2 − 1) − 10)`
+
+  با `facing="east"` (افقی) پین‌ها روی دو ردیف بالا/پایین با گام ۲۰ می‌نشینند. GND (`pinCount/2`) و VCC (`pinCount`) وقتی `VccGndPorts` خاموش است پورت ندارند ولی بقیه‌ی پین‌ها مختصاتشان جابه‌جا نمی‌شود.
+- **`facing="south"` برای تراشه‌ها خیلی تمیزتر است**: پین‌ها روی دو لبه‌ی چپ/راست می‌افتند و می‌شود هر پین را با یک استاب افقی به تونل وصل کرد. بدنه‌ی تونل ۲۶×۱۸ است (کوتاه در ارتفاع)، پس در گام عمودی ۲۰ جا می‌شود؛ با تراشه‌ی افقی برعکس، تونل‌ها در گام افقی ۲۰ به هم می‌خورند. اگر طول استاب‌ها یک‌درمیان ۳۰ و ۹۰ باشد، تونل‌های هم‌سطح ۴۰ واحد فاصله می‌گیرند و هیچ برخوردی پیش نمی‌آید.
+- **مختصات اسپلیتر** از `SplitterParameters`. برای `facing=east`, `appear=right`: سر مشترک روی `loc` و انتهای `i` ام روی `(x+20, y+10+spacing·10·i)`. `spacing="3"` فاصله‌ی ۳۰ می‌دهد که برای وصل‌کردن به تونل‌ها راحت است.
+- **بردار تست ترتیبی**: هدر می‌تواند ستون‌های `<Set>` و `<Seq>` داشته باشد. لاجسیم در شروع هر `<Set>` مدار را ریست می‌کند و بین گام‌های `<Seq>` وضعیت را نگه می‌دارد — یعنی مدارهای ترتیبی کاملاً قابل تست‌اند. علامت don't-care `<DC>` است (نه `x`).
+- در هر ردیفِ غیرِ ریست، `Propagator.toggleClocks()` صدا زده می‌شود؛ پس اگر مدار قطعه‌ی `Clock` داشته باشد، خود لاجسیم آن را تیک می‌زند و ستون `clk` در بردار لازم نیست.
+- **ساب‌مدار با ظاهر سفارشی مشکلی ندارد**: `<a name="appearance" val="custom"/>` به‌علاوه‌ی بلوک `<appear>` با `<circ-anchor x="0" y="0"/>` و `<circ-port pin="X,Y" x="dx" y="dy"/>`. محل پورت نمونه = `loc` نمونه + `(dx,dy)`. همان الگوی Lab01.
+- در `74194` لاجسیم `QA` پرارزش‌ترین بیت است و `QD` کم‌ارزش‌ترین (شیفت راست از `QA` وارد می‌شود)؛ در `74161` برعکس `QA` بیت صفر است.
+
 ## فرمت بردار تست (`.vec`)
 
 ```text
@@ -160,6 +175,13 @@ A[4] B[4] Cin S[4] Cout
 - فایل: [`Assignments/Lab02-Carry-Select-Adder/carry_select_adder.circ`](Assignments/Lab02-Carry-Select-Adder/carry_select_adder.circ)
 - مدارها: `full_adder`, `adder2`, `main`
 - جزئیات: [`Assignments/Lab02-Carry-Select-Adder/README.md`](Assignments/Lab02-Carry-Select-Adder/README.md)
+
+## مدار آماده Lab03
+
+- فایل: [`Assignments/Lab03-Binary-Multiplier/multiplier.circ`](Assignments/Lab03-Binary-Multiplier/multiplier.circ)
+- مدارها: `multiplier` (۶ تراشه‌ی TTL), `main` (دمو با Clock)
+- ژنراتور + چکِر هندسی: [`build_circ.py`](Assignments/Lab03-Binary-Multiplier/build_circ.py)
+- جزئیات: [`Assignments/Lab03-Binary-Multiplier/README.md`](Assignments/Lab03-Binary-Multiplier/README.md)
 
 ## لینک‌ها
 

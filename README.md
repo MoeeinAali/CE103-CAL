@@ -17,6 +17,7 @@ In the "Assignments" folder, you will find the solutions to assignments given du
 
 - [Lab 01 — BCD (Decimal) Adder](Assignments/Lab01-BCD-Adder/) — سه جمع‌کننده دهدهی یک‌رقمی زنجیره‌شده در Logisim
 - [Lab 02 — Carry Select Adder](Assignments/Lab02-Carry-Select-Adder/) — جمع‌کننده ۶ بیتی با انتخاب رقم نقلی برای افزایش سرعت
+- [Lab 03 — Binary Multiplier](Assignments/Lab03-Binary-Multiplier/) — ضرب‌کننده ترتیبی ۴×۴ به روش shift & add با تراشه‌های سری ۷۴
 
 ## Exams
 
