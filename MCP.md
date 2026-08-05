@@ -183,6 +183,11 @@ A[4] B[4] Cin S[4] Cout
 - ژنراتور + چکِر هندسی: [`build_circ.py`](Assignments/Lab03-Binary-Multiplier/build_circ.py)
 - جزئیات: [`Assignments/Lab03-Binary-Multiplier/README.md`](Assignments/Lab03-Binary-Multiplier/README.md)
 
+## کمبودهای MCP
+
+فهرست باگ‌ها و قابلیت‌های گمشده‌ی سرور، همراه با فرمول‌های آماده برای پیاده‌سازی:
+[`MCP-TODO.md`](MCP-TODO.md)
+
 ## لینک‌ها
 
 - [logisim-mcp](https://github.com/virsi/logisim-mcp)

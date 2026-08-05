@@ -38,6 +38,7 @@ In the "Source" folder, you will find the source of the course.
 ## Tooling
 
 - [MCP.md](MCP.md) — setup for Logisim MCP (Cursor / future agent sessions)
+- [MCP-TODO.md](MCP-TODO.md) — کمبودهای سرور MCP و کارهای بعدی
 
 ## Maintainer
 
