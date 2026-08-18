@@ -97,7 +97,7 @@
 \begin{center}
 \begin{tabular}{@{}lll@{}}
 \toprule
-\textbf{پایه} & \textbf{جهت} & \textbf{پهنا} \\
+{پایه} & {جهت} & {پهنا} \\
 \midrule
 \lr{A}, \lr{B}, \lr{Cin} & ورودی & ۱ بیت \\
 \lr{Sum}, \lr{Cout} & خروجی & ۱ بیت \\
@@ -156,7 +156,7 @@ A & B & Cin & Sum & Cout \\
 \begin{center}
 \begin{tabular}{@{}lll@{}}
 \toprule
-\textbf{پایه} & \textbf{جهت} & \textbf{پهنا} \\
+{پایه} & {جهت} & {پهنا} \\
 \midrule
 \lr{A}, \lr{B} & ورودی & ۴ بیت (رقم \lr{BCD}، ۰ تا ۹) \\
 \lr{Cin} & ورودی & ۱ بیت \\
@@ -174,7 +174,7 @@ A & B & Cin & Sum & Cout \\
 \begin{center}
 \begin{tabular}{@{}lllll@{}}
 \toprule
-\textbf{نمونه} & \textbf{بیت} & \textbf{ورودی‌ها} & \textbf{خروجی جمع} & \textbf{رقم نقلی} \\
+{نمونه} & {بیت} & {ورودی‌ها} & {خروجی جمع} & {رقم نقلی} \\
 \midrule
 \lr{FA0} & ۰ (کم‌ارزش) & $A_0, B_0, C_{in}$ & $S_0$ & $CY_0$ \\
 \lr{FA1} & ۱ & $A_1, B_1, CY_0$ & $S_1$ & $CY_1$ \\
@@ -198,7 +198,7 @@ CORR = C_{outH} \lor (S_3 \land S_2) \lor (S_3 \land S_1)
 \begin{center}
 \begin{tabular}{@{}llll@{}}
 \toprule
-\textbf{سیگنال} & \textbf{گیت} & \textbf{فرمول} & \textbf{معنی} \\
+{سیگنال} & {گیت} & {فرمول} & {معنی} \\
 \midrule
 \lr{G1OUT} & \lr{OR} & $S_2 \lor S_1$ & آیا یکی از بیت‌های ۱ یا ۲ روشن است؟ \\
 \lr{G2OUT} & \lr{AND} & $S_3 \land {G1OUT}$ & آیا بیت ۳ \emph{و} یکی از بیت‌های ۱/۲ هم‌زمان روشن‌اند؟ \\
@@ -209,7 +209,7 @@ CORR = C_{outH} \lor (S_3 \land S_2) \lor (S_3 \land S_1)
 
 سیگنال \lr{CORR} مستقیما به پایه‌ی خروجی \lr{Cout} این مدار وصل است؛ یعنی {رقم نقلی دهدهی، همان سیگنال تصحیح است.}
 
-\textbf{چرا این فرمول درست کار می‌کند؟}
+{چرا این فرمول درست کار می‌کند؟}
 
 اگر $C_{outH}=1$، جمع خام حتما $\geq 16 > 9$ است. اگر $C_{outH}=0$، جمع خام حداکثر ۱۵ است؛ در این حالت باید $S_3=1$ باشد تا مقدار $\geq 8$ شود. با $S_3=1$: اگر $S_2=1$ مقدار حداقل ۱۲ است (همیشه $>9$)؛ اگر $S_2=0$ ولی $S_1=1$ مقدار حداقل ۱۰ است (باز هم $>9$). این دقیقا همان چیزی است که عبارت $(S_3\land S_2)\lor(S_3\land S_1)$ تشخیص می‌دهد.
 
@@ -219,7 +219,7 @@ CORR = C_{outH} \lor (S_3 \land S_2) \lor (S_3 \land S_1)
 \begin{center}
 \begin{tabular}{@{}lllllll@{}}
 \toprule
-\textbf{نمونه} & \textbf{بیت} & \textbf{ورودی} \lr{A} & \textbf{ورودی} \lr{B} & \lr{Cin} & \textbf{جمع نهایی} & \textbf{رقم نقلی} \\
+{نمونه} & {بیت} & {ورودی} \lr{A} & {ورودی} \lr{B} & \lr{Cin} & {جمع نهایی} & {رقم نقلی} \\
 \midrule
 \lr{FAC0} & ۰ & $S_0$ & 0 & 0 & $SD_0$ & $CYC_0$ \\
 \lr{FAC1} & ۱ & $S_1$ & \lr{CORR} & $CYC_0$ & $SD_1$ & $CYC_1$ \\
@@ -231,7 +231,7 @@ CORR = C_{outH} \lor (S_3 \land S_2) \lor (S_3 \land S_1)
 
 بیت‌های $SD_0..SD_3$ (رقم نهایی و تصحیح‌شده) با یک تفکیک‌کننده‌ی ترکیبی به پایه‌ی خروجی \lr{S} وصل می‌شوند و هم‌زمان برای نمایش بصری به یک نمایشگر هفت‌قطعه‌ای (\lr{Hex Digit Display}) می‌روند.
 
-\textbf{چرا رقم نقلی \lr{FAC3} استفاده نمی‌شود؟}
+{چرا رقم نقلی \lr{FAC3} استفاده نمی‌شود؟}
 
 چون حداکثر مقدار ممکن در این جمع، $9+6=15$ است که همیشه در ۴ بیت جا می‌شود؛ بنابراین این جمع هرگز سرریز نمی‌کند.
 
@@ -251,7 +251,7 @@ CORR = C_{outH} \lor (S_3 \land S_2) \lor (S_3 \land S_1)
 \begin{center}
 \begin{tabular}{@{}lll@{}}
 \toprule
-\textbf{پایه} & \textbf{جهت} & \textbf{پهنا} \\
+{پایه} & {جهت} & {پهنا} \\
 \midrule
 \lr{A100}, \lr{A10}, \lr{A1} & ورودی & ۴ بیت هرکدام (رقم صدگان، دهگان، یکان عدد اول) \\
 \lr{B100}, \lr{B10}, \lr{B1} & ورودی & ۴ بیت هرکدام (رقم صدگان، دهگان، یکان عدد دوم) \\
@@ -267,7 +267,7 @@ CORR = C_{outH} \lor (S_3 \land S_2) \lor (S_3 \land S_1)
 \begin{center}
 \begin{tabular}{@{}llllll@{}}
 \toprule
-\textbf{نمونه} & \textbf{رقم} & \lr{A} & \lr{B} & \lr{Cin} & \lr{Cout} می‌رود به \\
+{نمونه} & {رقم} & \lr{A} & \lr{B} & \lr{Cin} & \lr{Cout} می‌رود به \\
 \midrule
 \lr{digit\_1} & یکان & \lr{A1} & \lr{B1} & \lr{Cin} (ورودی مدار) & تونل \lr{Cout1} \\
 \lr{digit\_10} & دهگان & \lr{A10} & \lr{B10} & تونل \lr{Cout1} & تونل \lr{Cout10} \\
